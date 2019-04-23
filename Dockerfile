@@ -5,7 +5,7 @@
 FROM ubuntu:18.04
 MAINTAINER Saber Ouechtati <saberouechtati@gmail.com>
 
-ENV VERSION_SDK_TOOLS "4333796"
+ENV VERSION_SDK_TOOLS "25.2.2"
 ENV VERSION_BUILD_TOOLS "25"
 ENV VERSION_TARGET_SDK "25"
 
@@ -51,9 +51,9 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
     sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure
     
-ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip /sdk.zip
-RUN sudo unzip //sdk.zip -d /sdk && \
-    sudo rm -v //sdk.zip
+ADD http://dl.google.com/android/repository/tools_r${VERSION_SDK_TOOLS}-linux.zip /tools.zip
+RUN sudo unzip /tools.zip -d /sdk && \
+    sudo rm -v /tools.zip
 
 RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg && \
