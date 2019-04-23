@@ -75,6 +75,4 @@ RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
 
 RUN export GRADLE_HOME=/opt/gradle/gradle-4.10.1
 RUN export PATH=${GRADLE_HOME}/bin:${PATH}
-RUN source /etc/environment
-Run echo $PATH
-RUN gradle -v
+RUN echo $PATH
