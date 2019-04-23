@@ -56,7 +56,7 @@ RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg && \
   sudo ${ANDROID_HOME}/tools/bin/sdkmanager --update 
 
-RUN sudo while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
+RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
     sudo ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
 
 RUN sudo yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
