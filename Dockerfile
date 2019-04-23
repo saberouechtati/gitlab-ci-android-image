@@ -48,7 +48,7 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
     sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-RUN sudo curl -s https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip > /sdk.zip && \
+RUN sudo curl -s https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip > sudo /sdk.zip && \
     sudo unzip /sdk.zip -d /sdk && \
     sudo rm -v /sdk.zip
 
@@ -57,7 +57,7 @@ RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg && \
   sudo ${ANDROID_HOME}/tools/bin/sdkmanager --update 
 
-RUN sudo while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
+RUN sudo while read -r package; do PACKAGES="${PACKAGES}${package} "; done < sudo /sdk/packages.txt && \
     sudo ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
 
 RUN sudo yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
