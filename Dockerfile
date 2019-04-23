@@ -58,9 +58,4 @@ RUN sudo unzip /tools.zip -d /sdk && \
 RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg
 
-RUN sudo mkdir -p /root/.android && \
-    sudo touch /root/.android/repositories.cfg 
-
 RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
-
-RUN yes | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
