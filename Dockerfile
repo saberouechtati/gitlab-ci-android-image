@@ -6,6 +6,10 @@ FROM ubuntu:18.04
 MAINTAINER Saber Ouechtati <saberouechtati@gmail.com>
 
 ENV VERSION_SDK_TOOLS "4333796"
+ENV VERSION_BUILD_TOOLS "25"
+ENV VERSION_TARGET_SDK "25"
+
+ENV SDK_PACKAGES "build-tools-${VERSION_BUILD_TOOLS},android-${VERSION_TARGET_SDK},addon-google_apis-google-${VERSION_TARGET_SDK},platform-tools,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository"
 
 ENV ANDROID_HOME "/sdk"
 ENV PATH "$PATH:${ANDROID_HOME}/tools"
@@ -51,12 +55,13 @@ ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS
 RUN sudo unzip //sdk.zip -d /sdk && \
     sudo rm -v //sdk.zip
 
-ADD packages.txt /sdk
 RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg && \
   sudo ${ANDROID_HOME}/tools/bin/sdkmanager --update 
 
-RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
-    sudo ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
+RUN sudo mkdir -p /root/.android && \
+    sudo touch /root/.android/repositories.cfg 
+
+RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
 
 RUN yes | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
