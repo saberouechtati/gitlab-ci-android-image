@@ -65,5 +65,5 @@ RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android
 # RUN sudo unzip gradle-4.10.1-all.zip
 # ENV GRADLE_HOME=/app/gradle-4.10.1
 # ENV PATH=$PATH:$GRADLE_HOME/bin
-Run sudo sdk install gradle 4.10.1
+Run sdk install gradle 4.10.1
 RUN ./gradlew test jar
