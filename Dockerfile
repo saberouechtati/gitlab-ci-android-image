@@ -61,6 +61,10 @@ RUN sudo mkdir -p /root/.android && \
 
 RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
 
+RUN sudo apt-get update
+RUN sudo apt-get upgrade -y
+RUN sudo apt-get install wget
+
 # RUN sudo curl -L https://services.gradle.org/distributions/gradle-4.10.1-all.zip -o gradle-4.10.1-all.zip
 # RUN sudo unzip gradle-4.10.1-all.zip
 # ENV GRADLE_HOME=/app/gradle-4.10.1
@@ -68,6 +72,11 @@ RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android
 ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.1-all.zip
 RUN sudo mkdir /opt/gradle
 RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
-RUN export PATH=$PATH:/opt/gradle/gradle-4.10.1/bin
+
+RUN sudo nano /etc/profile.d/gradle.sh
+RUN export GRADLE_HOME=/opt/gradle/gradle-4.10.1
+RUN export PATH=${GRADLE_HOME}/bin:${PATH}
+RUN sudo chmod +x /etc/profile.d/gradle.sh
+RUN source /etc/profile.d/gradle.sh
 Run echo $PATH
 RUN gradle -v
