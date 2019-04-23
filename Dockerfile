@@ -56,8 +56,7 @@ RUN sudo unzip /tools.zip -d /sdk && \
     sudo rm -v /tools.zip
 
 RUN sudo mkdir -p /root/.android && \
-  sudo touch /root/.android/repositories.cfg && \
-  sudo ${ANDROID_HOME}/tools/bin/sdkmanager --update 
+  sudo touch /root/.android/repositories.cfg
 
 RUN sudo mkdir -p /root/.android && \
     sudo touch /root/.android/repositories.cfg 
