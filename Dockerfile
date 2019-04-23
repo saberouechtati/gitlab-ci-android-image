@@ -65,6 +65,8 @@ RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android
 # RUN sudo unzip gradle-4.10.1-all.zip
 # ENV GRADLE_HOME=/app/gradle-4.10.1
 # ENV PATH=$PATH:$GRADLE_HOME/bin
+ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.1-all.zip
 Run sudo mkdir /opt/gradle
-RUN sudo unzip -d /opt/gradle gradle-5.4-bin.zip
+RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
+RUN sudo export PATH=$PATH:/opt/gradle/gradle-4.10.1/bin
 RUN gradle -v
