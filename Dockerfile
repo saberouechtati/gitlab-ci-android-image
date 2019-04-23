@@ -42,8 +42,8 @@ RUN sudo apt-get -qq update && \
       locales \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-RUN locale-gen en_EN.UTF-8
-ENV LANG='en_EN.UTF-8' LANGUAGE='en_EN:en' LC_ALL='en_EN.UTF-8'
+RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
