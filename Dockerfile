@@ -77,3 +77,4 @@ ENV GRADLE_HOME /opt/gradle/gradle-4.10.1
 ENV PATH "$PATH:${GRADLE_HOME}/bin"
 RUN echo $PATH
 RUN gradle -v
+RUN gradle wrapper
