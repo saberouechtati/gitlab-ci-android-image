@@ -61,8 +61,8 @@ RUN sudo mkdir -p /root/.android && \
 
 RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
 
-RUN curl -L https://services.gradle.org/distributions/gradle-4.10.1-all.zip -o gradle-4.10.1-all.zip
-RUN unzip gradle-4.10.1-all.zip
+RUN sudo curl -L https://services.gradle.org/distributions/gradle-4.10.1-all.zip -o gradle-4.10.1-all.zip
+RUN sudo unzip gradle-4.10.1-all.zip
 ENV GRADLE_HOME=/app/gradle-4.10.1
 ENV PATH=$PATH:$GRADLE_HOME/bin
-RUN gradle test jar
+RUN sudo gradle test jar
