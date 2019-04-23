@@ -65,4 +65,4 @@ RUN sudo curl -L https://services.gradle.org/distributions/gradle-4.10.1-all.zip
 RUN sudo unzip gradle-4.10.1-all.zip
 ENV GRADLE_HOME=/app/gradle-4.10.1
 ENV PATH=$PATH:$GRADLE_HOME/bin
-RUN sudo gradle test jar
+RUN gradle test jar
