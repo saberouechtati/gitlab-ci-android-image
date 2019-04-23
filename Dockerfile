@@ -29,7 +29,6 @@ USER docker
 RUN sudo apt-get -qq update && \
     sudo apt-get install -qqy --no-install-recommends \
       bzip2 \
-      curl \
       git-core \
       html2text \
       openjdk-8-jdk \
@@ -47,10 +46,10 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
     sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure
-
-RUN sudo curl -s https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip > /sdk.zip && \
-    sudo unzip /sdk.zip -d /sdk && \
-    sudo rm -v /sdk.zip
+    
+ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip /sdk.zip
+RUN sudo unzip //sdk.zip -d /sdk && \
+    sudo rm -v //sdk.zip
 
 ADD packages.txt /sdk
 RUN sudo mkdir -p /root/.android && \
