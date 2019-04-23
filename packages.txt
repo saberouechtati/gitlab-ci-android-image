@@ -1,8 +1,0 @@
-build-tools-28
-android-25
-addon-google_apis-google-28
-platform-tools
-extra-android-m2repository
-extra-android-support
-extra-google-google_play_services
-extra-google-m2repository
