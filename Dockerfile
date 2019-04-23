@@ -42,7 +42,7 @@ RUN sudo apt-get -qq update && \
       locales \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-RUN locale-gen en_US.UTF-8
+RUN sudo locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
@@ -55,7 +55,7 @@ RUN sudo curl -s https://dl.google.com/android/repository/sdk-tools-linux-${VERS
 ADD packages.txt /sdk
 RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg && \
-  ${ANDROID_HOME}/tools/bin/sdkmanager --update 
+  sudo ${ANDROID_HOME}/tools/bin/sdkmanager --update 
 
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
     ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
