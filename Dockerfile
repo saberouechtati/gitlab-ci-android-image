@@ -69,4 +69,5 @@ ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.
 RUN sudo mkdir /opt/gradle
 RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
 RUN export PATH=$PATH:/opt/gradle/gradle-4.10.1/bin
+Run echo $PATH
 RUN gradle -v
