@@ -59,3 +59,10 @@ RUN sudo mkdir -p /root/.android && \
   sudo touch /root/.android/repositories.cfg
 
 RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
+
+ADD https://services.gradle.org/distributions/gradle-2.4-bin.zip -o gradle-2.4-bin.zip
+RUN apt-get install -y unzip
+RUN unzip gradle-2.4-bin.zip
+ENV GRADLE_HOME=/app/gradle-2.4
+ENV PATH=$PATH:$GRADLE_HOME/bin
+RUN gradle test jar
