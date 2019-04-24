@@ -42,7 +42,7 @@ RUN rm -f /etc/ssl/certs/java/cacerts; \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
     
 RUN dpkg --purge --force-depends ca-certificates-java
-RUN apt-get install ca-certificates-java
+RUN apt-get install ca-certificates-java -f
     
 ADD http://dl.google.com/android/repository/tools_r${VERSION_SDK_TOOLS}-linux.zip /tools.zip
 RUN unzip /tools.zip -d /sdk && \
@@ -68,6 +68,3 @@ RUN gradle -v
 
 # install gradle wrapper
 RUN gradle wrapper --gradle-version 4.10.1
-
-# this will fail with EC crypto errors, return true to continue
-RUN ./gradlew clean assemble || true
