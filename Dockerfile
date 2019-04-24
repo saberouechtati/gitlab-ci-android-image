@@ -62,3 +62,9 @@ ENV GRADLE_HOME /opt/gradle/gradle-4.10.1
 ENV PATH "$PATH:${GRADLE_HOME}/bin"
 RUN echo $PATH
 RUN gradle -v
+
+# install gradle wrapper
+RUN gradle wrapper --gradle-version 4.10.1
+
+# this will fail with EC crypto errors, return true to continue
+RUN ./gradlew clean assemble || true
