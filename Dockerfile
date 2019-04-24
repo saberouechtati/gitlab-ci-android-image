@@ -21,16 +21,7 @@ RUN mkdir -p $ANDROID_HOME/licenses/ \
   && echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c0de7af1a06de9f4b1727b84351f2910" > $ANDROID_HOME/licenses/android-sdk-preview-license
   
 RUN apt-get -qq update && \
-    apt-get install -y -qqy --no-install-recommends \
-    sudo  
-RUN adduser --disabled-password --gecos '' docker
-RUN adduser docker sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-USER docker
-
-RUN sudo apt-get -qq update && \
-    sudo apt-get install -qqy --no-install-recommends \
+    apt-get install -qqy --no-install-recommends \
       bzip2 \
       git-core \
       html2text \
@@ -42,30 +33,30 @@ RUN sudo apt-get -qq update && \
       lib32z1 \
       unzip \
       locales \
-    && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-RUN sudo locale-gen en_US.UTF-8
+RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-RUN sudo rm -f /etc/ssl/certs/java/cacerts; \
-    sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure
+RUN rm -f /etc/ssl/certs/java/cacerts; \
+    /var/lib/dpkg/info/ca-certificates-java.postinst configure
     
 ADD http://dl.google.com/android/repository/tools_r${VERSION_SDK_TOOLS}-linux.zip /tools.zip
-RUN sudo unzip /tools.zip -d /sdk && \
-    sudo rm -v /tools.zip
+RUN unzip /tools.zip -d /sdk && \
+    rm -v /tools.zip
 
-RUN sudo mkdir -p /root/.android && \
-  sudo touch /root/.android/repositories.cfg
+RUN mkdir -p /root/.android && \
+  touch /root/.android/repositories.cfg
 
-RUN (while [ 1 ]; do sleep 5; echo y; done) | sudo ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
+RUN (while [ 1 ]; do sleep 5; echo y; done) | ${ANDROID_HOME}/tools/android update sdk -u -a -t ${SDK_PACKAGES}
 
-RUN sudo apt-get update
-RUN sudo apt-get upgrade -y
-RUN sudo apt-get install wget
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install wget
 
 ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.1-all.zip
-RUN sudo mkdir /opt/gradle
-RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
+RUN mkdir /opt/gradle
+RUN unzip -d /opt/gradle gradle-4.10.1-all.zip
 
 ENV GRADLE_HOME /opt/gradle/gradle-4.10.1
 ENV PATH "$PATH:${GRADLE_HOME}/bin"
