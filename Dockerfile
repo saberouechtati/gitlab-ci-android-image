@@ -41,6 +41,9 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN rm -f /etc/ssl/certs/java/cacerts; \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
     
+RUN dpkg --purge --force-depends ca-certificates-java
+RUN apt-get install ca-certificates-java
+    
 ADD http://dl.google.com/android/repository/tools_r${VERSION_SDK_TOOLS}-linux.zip /tools.zip
 RUN unzip /tools.zip -d /sdk && \
     rm -v /tools.zip
