@@ -22,8 +22,7 @@ RUN mkdir -p $ANDROID_HOME/licenses/ \
   
 RUN apt-get -qq update && \
     apt-get install -y -qqy --no-install-recommends \
-      sudo
-  
+    sudo  
 RUN adduser --disabled-password --gecos '' docker
 RUN adduser docker sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
@@ -32,7 +31,6 @@ USER docker
 
 RUN sudo apt-get -qq update && \
     sudo apt-get install -qqy --no-install-recommends \
-      curl \
       bzip2 \
       git-core \
       html2text \
@@ -65,10 +63,6 @@ RUN sudo apt-get update
 RUN sudo apt-get upgrade -y
 RUN sudo apt-get install wget
 
-# RUN sudo curl -L https://services.gradle.org/distributions/gradle-4.10.1-all.zip -o gradle-4.10.1-all.zip
-# RUN sudo unzip gradle-4.10.1-all.zip
-# ENV GRADLE_HOME=/app/gradle-4.10.1
-# ENV PATH=$PATH:$GRADLE_HOME/bin
 ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.1-all.zip
 RUN sudo mkdir /opt/gradle
 RUN sudo unzip -d /opt/gradle gradle-4.10.1-all.zip
