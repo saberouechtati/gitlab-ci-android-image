@@ -68,4 +68,4 @@ RUN echo $PATH
 RUN gradle -v
 
 # install gradle wrapper
-RUN gradle wrapper --gradle-version 5.4.1
+# RUN gradle wrapper --gradle-version 5.4.1
