@@ -58,14 +58,14 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install wget
 
-ADD https://services.gradle.org/distributions/gradle-4.10.1-all.zip gradle-4.10.1-all.zip
+ADD https://services.gradle.org/distributions/gradle-5.4.1-all.zip gradle-5.4.1-all.zip
 RUN mkdir /opt/gradle
-RUN unzip -d /opt/gradle gradle-4.10.1-all.zip
+RUN unzip -d /opt/gradle gradle-5.4.1-all.zip
 
-ENV GRADLE_HOME /opt/gradle/gradle-4.10.1
+ENV GRADLE_HOME /opt/gradle/gradle-5.4.1
 ENV PATH "$PATH:${GRADLE_HOME}/bin"
 RUN echo $PATH
 RUN gradle -v
 
 # install gradle wrapper
-RUN gradle wrapper --gradle-version 4.10.1
+RUN gradle wrapper --gradle-version 5.4.1
